@@ -19,17 +19,15 @@ router.post('/post', csrfProtection, function(req, res) {
     service: 'Gmail',
     auth: {
       type: 'OAuth2',
-      user: 'BetaPhoenixSNSD@gmail.com',
-      clientId:
-        '997919901780-d24i0cbsm7b9kedfdcjciartbovstk4q.apps.googleusercontent.com',
-      clientSecret: 'No2CfohQGCWvKkIMej-sU_CL',
-      refreshToken:
-        '1//04XI29Ry7B6VICgYIARAAGAQSNwF-L9IrZxFS3xjKsAHhHKV5c7Us4wr4UdjNn20JutI4BO31lcXJRUE9lDRb1w7L45ovYUroyso',
+      user: process.env.NODEMAILER_USERNAME,
+      clientId: process.env.NODEMAILER_CLIENTID,
+      clientSecret: process.env.NODEMAILER_CLIENTSECRET,
+      refreshToken: process.env.NODEMAILER_REFRESHTOKEN,
     },
   });
   const mailOptions = {
-    from: '"來自蘇揚傑"<BetaPhoenixSNSD@gmail.com>',
-    to: 'CloudSu0905@gmail.com',
+    from: `"來自蘇揚傑"<${process.env.NODEMAILER_USERNAME}>`,
+    to: req.body.email,
     subject: `${req.body.username}寄了一封測試信`,
     text: req.body.description,
   };
